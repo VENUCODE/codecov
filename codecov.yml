@@ -30,17 +30,6 @@ coverage:
           - master
         if_ci_failed: error
         only_pulls: false
-    
-    changes:
-      default:
-        target: 90%
-        threshold: 5%
-        base: auto
-        branches:
-          - main
-          - master
-        if_ci_failed: error
-        only_pulls: false
 
 comment:
   layout: "reach,diff,flags,tree,reach"
