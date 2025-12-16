@@ -18,12 +18,34 @@ jobs:
       continue-on-error: true
       run: |
         pytest --cov=app --cov-report=xml --cov-report=term --cov-fail-under=90
-    - name: Check test results
-      if: steps.test.outcome == 'failure'
-      run: |
-        echo "⚠️ Tests failed or coverage below threshold, but continuing to upload coverage report..."
     - name: Upload coverage reports to Codecov with GitHub Action
       uses: codecov/codecov-action@v5
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       continue-on-error: false
+    - name: Check coverage threshold
+      if: always()
+      run: |
+        python -c "
+        import xml.etree.ElementTree as ET
+        import sys
+        
+        try:
+            tree = ET.parse('coverage.xml')
+            root = tree.getroot()
+            coverage = float(root.attrib.get('line-rate', 0)) * 100
+            print(f'Current coverage: {coverage:.2f}%')
+            print(f'Required coverage: 90%')
+            
+            if coverage < 90:
+                print(f'❌ Coverage {coverage:.2f}% is below the required 90% threshold')
+                sys.exit(1)
+            else:
+                print(f'✅ Coverage {coverage:.2f}% meets the required 90% threshold')
+        except FileNotFoundError:
+            print('❌ Coverage report not found')
+            sys.exit(1)
+        except Exception as e:
+            print(f'❌ Error checking coverage: {e}')
+            sys.exit(1)
+        "
