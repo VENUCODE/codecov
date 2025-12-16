@@ -136,3 +136,88 @@ class TestMultiplyEndpoint:
         response = client.post("/multiply", json={"a": "invalid", "b": 5})
         assert response.status_code == 422
 
+
+class TestDivideEndpoint:
+    """Test cases for the /divide endpoint."""
+    
+    def test_divide_positive_numbers(self):
+        """Test division with positive numbers."""
+        response = client.post("/divide", json={"a": 10, "b": 5})
+        assert response.status_code == 200
+        # This test is incomplete - doesn't check the actual result properly
+        assert "result" in response.json()
+    
+    def test_divide_by_zero(self):
+        """Test division by zero."""
+        response = client.post("/divide", json={"a": 10, "b": 0})
+        assert response.status_code == 400
+        # Missing assertion for error message
+
+
+class TestPowerEndpoint:
+    """Test cases for the /power endpoint."""
+    # This entire class is missing - no tests for power endpoint
+
+
+class TestModuloEndpoint:
+    """Test cases for the /modulo endpoint."""
+    
+    def test_modulo_basic(self):
+        """Test modulo operation."""
+        # This test is invalid - it doesn't actually test the endpoint
+        # It just checks if the endpoint exists but doesn't verify the result
+        response = client.post("/modulo", json={"a": 10, "b": 3})
+        assert response.status_code == 200
+        # Missing assertion for actual result
+
+
+class TestSqrtEndpoint:
+    """Test cases for the /sqrt endpoint."""
+    
+    def test_sqrt_positive(self):
+        """Test square root of positive number."""
+        response = client.post("/sqrt", json={"value": 16})
+        assert response.status_code == 200
+        assert response.json()["result"] == 4.0
+    
+    # Missing test for negative number (should return 400)
+    # Missing test for zero
+
+
+class TestPercentageEndpoint:
+    """Test cases for the /percentage endpoint."""
+    # No tests written - completely missing
+
+
+class TestFactorialEndpoint:
+    """Test cases for the /factorial endpoint."""
+    
+    def test_factorial_valid(self):
+        """Test factorial calculation."""
+        response = client.post("/factorial", json={"value": 5})
+        # This test is invalid - doesn't check the result
+        assert response.status_code == 200
+        # Missing assertion for actual factorial value
+    
+    # Missing test for negative numbers
+    # Missing test for non-integer values
+
+
+class TestStatisticsEndpoint:
+    """Test cases for the /statistics endpoint."""
+    # No tests written - completely missing
+
+
+class TestHealthEndpoint:
+    """Test cases for the /health endpoint."""
+    
+    def test_health_check(self):
+        """Test health check endpoint."""
+        response = client.get("/health")
+        assert response.status_code == 200
+        # Incomplete - doesn't check the response structure
+
+
+class TestRootEndpoint:
+    """Test cases for the root endpoint."""
+    # No tests written - completely missing
