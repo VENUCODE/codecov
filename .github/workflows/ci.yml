@@ -18,7 +18,7 @@ jobs:
       continue-on-error: true
       run: |
         pytest --cov=app --cov-report=xml --cov-report=term --junitxml=junit.xml || true
-    - name: Upload coverage reports to Codecov with GitHub Action
+    - name: Upload coverage reports to Codecov
       if: always()
       uses: codecov/codecov-action@v5
       env:
@@ -26,12 +26,17 @@ jobs:
       continue-on-error: true
       with:
         fail_ci_if_error: false
+        files: ./coverage.xml
     - name: Upload test results to Codecov
       if: always() && !cancelled()
-      uses: codecov/test-results-action@v1
+      uses: codecov/codecov-action@v5
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      continue-on-error: true
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: junit.xml
+        report_type: test_results
+        files: ./junit.xml
+        fail_ci_if_error: false
     - name: Display coverage summary
       if: always()
       run: |
