@@ -11,7 +11,7 @@ coverage:
   status:
     project:
       default:
-        target: 70%
+        target: 90%
         threshold: 5%
         base: auto
         branches:
@@ -22,7 +22,7 @@ coverage:
     
     patch:
       default:
-        target: 80%
+        target: 90%
         threshold: 5%
         base: auto
         branches:
@@ -33,7 +33,7 @@ coverage:
     
     changes:
       default:
-        target: 80%
+        target: 90%
         threshold: 5%
         base: auto
         branches:
