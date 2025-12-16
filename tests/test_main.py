@@ -9,10 +9,10 @@ class TestAddEndpoint:
     """Test cases for the /add endpoint."""
     
     def test_add_positive_numbers(self):
-        """Test addition with positive numbers."""
+        """Test addition with positive numbers - INTENTIONALLY FAILING."""
         response = client.post("/add", json={"a": 10, "b": 5})
         assert response.status_code == 200
-        assert response.json() == {"result": 15}
+        assert response.json() == {"result": 20}  # Wrong expected value - will fail
     
     def test_add_negative_numbers(self):
         """Test addition with negative numbers."""
@@ -53,10 +53,10 @@ class TestSubtractEndpoint:
     """Test cases for the /subtract endpoint."""
     
     def test_subtract_positive_numbers(self):
-        """Test subtraction with positive numbers."""
+        """Test subtraction with positive numbers - INTENTIONALLY FAILING."""
         response = client.post("/subtract", json={"a": 10, "b": 5})
         assert response.status_code == 200
-        assert response.json() == {"result": 5}
+        assert response.json() == {"result": 10}  # Wrong expected value - will fail
     
     def test_subtract_negative_numbers(self):
         """Test subtraction with negative numbers."""
@@ -97,9 +97,9 @@ class TestMultiplyEndpoint:
     """Test cases for the /multiply endpoint."""
     
     def test_multiply_positive_numbers(self):
-        """Test multiplication with positive numbers."""
+        """Test multiplication with positive numbers - INTENTIONALLY FAILING."""
         response = client.post("/multiply", json={"a": 10, "b": 5})
-        assert response.status_code == 200
+        assert response.status_code == 500  # Wrong status code - will fail
         assert response.json() == {"result": 50}
     
     def test_multiply_negative_numbers(self):
@@ -157,6 +157,7 @@ class TestDivideEndpoint:
 class TestPowerEndpoint:
     """Test cases for the /power endpoint."""
     # This entire class is missing - no tests for power endpoint
+    # This reduces coverage for the /power endpoint
 
 
 class TestModuloEndpoint:
@@ -175,10 +176,10 @@ class TestSqrtEndpoint:
     """Test cases for the /sqrt endpoint."""
     
     def test_sqrt_positive(self):
-        """Test square root of positive number."""
+        """Test square root of positive number - INTENTIONALLY FAILING."""
         response = client.post("/sqrt", json={"value": 16})
         assert response.status_code == 200
-        assert response.json()["result"] == 4.0
+        assert response.json()["result"] == 5.0  # Wrong expected value - will fail
     
     # Missing test for negative number (should return 400)
     # Missing test for zero
@@ -187,6 +188,7 @@ class TestSqrtEndpoint:
 class TestPercentageEndpoint:
     """Test cases for the /percentage endpoint."""
     # No tests written - completely missing
+    # This reduces coverage for the /percentage endpoint
 
 
 class TestFactorialEndpoint:
@@ -206,6 +208,7 @@ class TestFactorialEndpoint:
 class TestStatisticsEndpoint:
     """Test cases for the /statistics endpoint."""
     # No tests written - completely missing
+    # This reduces coverage for the /statistics endpoint
 
 
 class TestHealthEndpoint:
@@ -221,3 +224,4 @@ class TestHealthEndpoint:
 class TestRootEndpoint:
     """Test cases for the root endpoint."""
     # No tests written - completely missing
+    # This reduces coverage for the root endpoint
